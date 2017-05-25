@@ -13,13 +13,7 @@ public class MyPageProcessor implements PageProcessor{
     @Override
     public void process(Page page) {
         page.addTargetRequests(page.getHtml().links().regex("(https://baidu\\.com/\\w+/\\w+)").all());
-        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
-        page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
-        if (page.getResultItems().get("name")==null){
-            //skip this page
-            page.setSkip(true);
-        }
-        page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()"));
+        page.putField("page", page.getHtml().toString());
     }
 
     @Override
